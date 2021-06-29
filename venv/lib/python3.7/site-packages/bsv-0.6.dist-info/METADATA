@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: bsv
+Version: 0.6
+Summary: spider project to get buy_sell_volume from 4 Futures Exchanges in Chinese Mainland
+Home-page: https://gitee.com/ragnaros27/bsv
+Author: ragnaros27
+Author-email: gooddunk@163.com
+License: UNKNOWN
+Project-URL: Code, https://gitee.com/ragnaros27/bsv
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Requires-Dist: beautifulsoup4 (==4.8.1)
+Requires-Dist: lxml (==4.4.2)
+Requires-Dist: pandas (==0.25.3)
+Requires-Dist: requests (==2.22.0)
+Requires-Dist: click (==7.1.2)
+
+UNKNOWN
+
+
