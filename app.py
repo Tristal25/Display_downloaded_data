@@ -19,7 +19,7 @@ else:  # 否则使用四个斜线
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(os.getcwd(), os.getenv('DATABASE_FILE', 'data.db'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的监控
-
+api = Api(app)
 db = SQLAlchemy(app)
 
 class Holdings(db.Model):
@@ -115,6 +115,16 @@ class RequestExchange(Resource):
                                'start_date': start_date,
                                'end_date': end_date})
 
+    def post(self):
+        ex = list(Holdings.query.with_entities(Holdings.exchange).distinct().all()[0])
+        start_date = db.session.query(func.min(Holdings.tday)).all()[0][0]
+        end_date = db.session.query(func.max(Holdings.tday)).all()[0][0]
+        return jsonify(status_code=302,
+                       msg='Posted',
+                       data={'exchange': ex,
+                             'start_date': start_date,
+                             'end_date': end_date})
+
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
@@ -162,7 +172,7 @@ def index():
         return redirect(url_for('index'))
     return render_template("base.html", holdings = holdings)
 
-
+api.add_resource(RequestExchange, '/')
 
 
 
